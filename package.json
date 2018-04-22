@@ -2,7 +2,7 @@
   "name": "emmet-simplified",
   "description": "Emmet Simplified – the simplified essential tool for web developers",
   "main": "./lib/emmet",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "dependencies": {
     "emmet": "^1.3.2",
     "atom-space-pen-views": "^2.0.3"
