@@ -32,7 +32,6 @@ normalize = (text, editor) ->
 
 # Proprocess text data that should be used as snippet content
 # Currently, Atom’s snippets implementation has the following issues:
-# * supports $N or ${N:placeholder} notation, but not ${N}
 # * multiple $0 are not treated as distinct final tabstops
 preprocessSnippet = (value) ->
   order = []
@@ -52,7 +51,7 @@ preprocessSnippet = (value) ->
         # recursively update nested tabstops
         placeholder = tabStops.processText(placeholder, tabstopOptions)
 
-      if placeholder then "${#{group}:#{placeholder}}" else "$#{group}"
+      if placeholder then "${#{group}:#{placeholder}}" else "${#{group}}"
 
     escape: (ch) ->
       if ch == '$' then '\\$' else ch
@@ -208,7 +207,7 @@ module.exports =
   getSyntax: ->
     scope = @getCurrentScope().join(' ')
     return 'xsl' if ~scope.indexOf('xsl')
-    return 'jsx' if not /\bstring\b/.test(scope) && /\bsource\.jsx?\b/.test(scope)
+    return 'jsx' if not /\bstring\b/.test(scope) && /\bsource\.(js|ts)x?\b/.test(scope)
 
     sourceSyntax = scope.match(/\bsource\.([\w\-]+)/)?[0]
 
